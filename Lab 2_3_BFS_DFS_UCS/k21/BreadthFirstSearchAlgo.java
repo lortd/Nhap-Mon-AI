@@ -32,8 +32,9 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo{
 	public Node execute(Node root, String start, String goal) {
 		// TODO Auto-generated method stub
 		if (root.getLabel().equals(goal)) return new Node(goal);
-		if (start.equals(goal)) return execute(root, start);
+		if (start.equals(goal)) return new Node(goal);
 		Node strartNode = execute(root, start);
+		strartNode.setParent(null);
 		return execute(strartNode, goal);
 	}
 
