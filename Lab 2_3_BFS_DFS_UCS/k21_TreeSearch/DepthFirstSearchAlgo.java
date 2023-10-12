@@ -1,4 +1,4 @@
-package k21;
+package k21_TreeSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,13 @@ public class DepthFirstSearchAlgo implements ISearchAlgo{
 			explored.add(currentNode);
 			List<Node> children = currentNode.getChildrenNodes();
 			for (int i = children.size()-1; i >= 0; i--) {
-				if (!frontier.contains(children.get(i)) && !explored.contains(children.get(i))) {
-					children.get(i).setParent(currentNode);
-					frontier.push(children.get(i));
+				children.get(i).setParent(currentNode);
+				Node n = new Node(children.get(i).getLabel());
+				n.setParent(children.get(i).getParent());
+				for (Node node : children.get(i).getChildrenNodes()) {
+					n.addEdge(node);
 				}
+				frontier.add(n);
 			}
 		}
 		return null;

@@ -1,28 +1,31 @@
-package k21;
+package k21_TreeSearch;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
+import java.util.Queue;
 
-public class DepthFirstSearchAlgo implements ISearchAlgo{
-
+public class BreadthFirstSearchAlgo implements ISearchAlgo{
 	@Override
 	public Node execute(Node root, String goal) {
 		// TODO Auto-generated method stub
 		if (root.getLabel().equals(goal)) return root;
-		Stack<Node> frontier = new Stack<Node>();
+		Queue<Node> frontier = new LinkedList<Node>();
 		List<Node> explored = new ArrayList<>();
 		frontier.add(root);
 		while (!frontier.isEmpty()) {
-			Node currentNode = frontier.pop();
+			Node currentNode = frontier.poll();
 			if(currentNode.getLabel().equals(goal)) return currentNode;
 			explored.add(currentNode);
 			List<Node> children = currentNode.getChildrenNodes();
-			for (int i = children.size()-1; i >= 0; i--) {
-				if (!frontier.contains(children.get(i)) && !explored.contains(children.get(i))) {
-					children.get(i).setParent(currentNode);
-					frontier.push(children.get(i));
+			for (Node child : children) {
+				child.setParent(currentNode);
+				Node n = new Node(child.getLabel());
+				n.setParent(child.getParent());
+				for (Node node : child.getChildrenNodes()) {
+					n.addEdge(node);
 				}
+				frontier.add(n);
 			}
 		}
 		return null;

@@ -73,5 +73,11 @@ public class UniformCostSearchAlgo implements ISearchAlgo{
 		strartNode.setPathCost(0);
 		return execute(strartNode, goal);
 	}
+	
+	public Node execute(Node root, String goal, int limitedDepth) {
+		
+		
+		return null;
+	}
 
 }
