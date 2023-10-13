@@ -14,7 +14,7 @@ public class DepthLimitedSearchAlgo {
 			if (frontier.isEmpty()) return null;
 			else {
 				Node n = frontier.pop();
-				int nodeLevel = findUpParentNode(root, "S"), nextNodeLevel = findUpParentNode(n, "S");
+				int nodeLevel = depthLevel(root, "S"), nextNodeLevel = depthLevel(n, "S");
 				return execute(n, goal, nodeLevel-nextNodeLevel);
 			}
 		}
@@ -24,7 +24,7 @@ public class DepthLimitedSearchAlgo {
 				if (frontier.isEmpty()) return null;
 			else {
 				Node n = frontier.pop();
-				int nodeLevel = findUpParentNode(root, "S"), nextNodeLevel = findUpParentNode(n, "S");
+				int nodeLevel = depthLevel(root, "S"), nextNodeLevel = depthLevel(n, "S");
 				return execute(n, goal, nodeLevel-nextNodeLevel);
 			}
 			}
@@ -40,9 +40,9 @@ public class DepthLimitedSearchAlgo {
 		}
 	}
 	
-	public int findUpParentNode(Node n1, String n2) {
+	public int depthLevel(Node n1, String n2) {
 		if (n1.getParent().getLabel().equals(n2)) return 1;		
-		return 1+findUpParentNode(n1.getParent(), n2);
+		return 1+depthLevel(n1.getParent(), n2);
 	}
 
 }

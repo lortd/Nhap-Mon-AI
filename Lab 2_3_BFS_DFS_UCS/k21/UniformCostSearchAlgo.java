@@ -11,13 +11,11 @@ public class UniformCostSearchAlgo implements ISearchAlgo{
 	public Node execute(Node root, String goal) {
 		// TODO Auto-generated method stub
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>(new Comparator<Node>() {
-
 			@Override
 			public int compare(Node o1, Node o2) {
 				// TODO Auto-generated method stub
 				return (int) (o1.getPathCost()-o2.getPathCost());
-			}
-			
+			}			
 		});
 		
 		if (root.getLabel().equals(goal)) return root;
@@ -73,11 +71,4 @@ public class UniformCostSearchAlgo implements ISearchAlgo{
 		strartNode.setPathCost(0);
 		return execute(strartNode, goal);
 	}
-	
-	public Node execute(Node root, String goal, int limitedDepth) {
-		
-		
-		return null;
-	}
-
 }
