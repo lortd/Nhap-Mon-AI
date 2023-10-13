@@ -9,7 +9,6 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo{
 	@Override
 	public Node execute(Node root, String goal) {
 		// TODO Auto-generated method stub
-		if (root.getLabel().equals(goal)) return root;
 		Queue<Node> frontier = new LinkedList<Node>();
 		List<Node> explored = new ArrayList<>();
 		frontier.add(root);
@@ -34,6 +33,7 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo{
 		if (root.getLabel().equals(goal)) return root;
 		if (start.equals(goal)) return new Node(goal);
 		Node strartNode = execute(root, start);
+		if (strartNode == null) return null;
 		strartNode.setParent(null);
 		return execute(strartNode, goal);
 	}

@@ -14,46 +14,32 @@ public class UniformCostSearchAlgo implements ISearchAlgo{
 			@Override
 			public int compare(Node o1, Node o2) {
 				// TODO Auto-generated method stub
-				return (int) (o1.getPathCost()-o2.getPathCost());
+				int pc = Double.compare(o1.getPathCost(), o2.getPathCost());
+				if (pc != 0) {
+					return pc;
+				} else {
+					return o1.compareTo(o2);
+				}				
 			}			
 		});
 		
-		if (root.getLabel().equals(goal)) return root;
 		List<Node> explored = new ArrayList<>();
 		frontier.add(root);
 		while (!frontier.isEmpty()) {
 			Node currentNode = frontier.poll();
-			if(currentNode.getLabel().equals(goal)) return currentNode;
+			if (currentNode.getLabel().equals(goal)) return currentNode;
 			explored.add(currentNode);
-			List<Node> children = currentNode.getChildrenNodes();
-			for (Node child : children) {
-				if (!frontier.contains(child) && !explored.contains(child)) {
-					for (Edge edge : currentNode.getChildren()) {
-						if (edge.getEnd().equals(child)) {
-							child.setPathCost(edge.getWeight()+currentNode.getPathCost());
-							break;
-						}
-					}
-					child.setParent(currentNode);
-					frontier.add(child);
-				}else {
-					double newChildPathCost = 0;
-					for (Edge edge : currentNode.getChildren()) {
-						if (edge.getEnd().equals(child)) {
-							newChildPathCost = edge.getWeight() + currentNode.getPathCost();
-						}
-					}
-					for (Node frnode : frontier) {
-						if (frnode.equals(child)) {
-							if (frnode.getPathCost() > newChildPathCost) {
-								frontier.remove(frnode);
-								child.setPathCost(newChildPathCost);
-								child.setParent(currentNode);
-								frontier.add(child);
-								break;
-							}
-						}
-					}
+			List<Edge> children = currentNode.getChildren();
+			for (Edge child : children) {
+				Node n = child.getEnd();
+				double newPathCost = currentNode.getPathCost() + child.getWeight();
+				if (!frontier.contains(n) && !explored.contains(n)) {
+					n.setParent(currentNode);
+					n.setPathCost(newPathCost);
+					frontier.add(n);
+				} else if (n.getPathCost()>newPathCost){
+					n.setParent(currentNode);
+					n.setPathCost(newPathCost);
 				}
 			}
 		}
@@ -64,9 +50,10 @@ public class UniformCostSearchAlgo implements ISearchAlgo{
 	@Override
 	public Node execute(Node root, String start, String goal) {
 		// TODO Auto-generated method stub
-		if (root.getLabel().equals(goal)) return new Node(goal);
+		if (root.getLabel().equals(goal)) return root;
 		if (start.equals(goal)) return new Node(goal);
 		Node strartNode = execute(root, start);
+		if (strartNode == null) return null;
 		strartNode.setParent(null);
 		strartNode.setPathCost(0);
 		return execute(strartNode, goal);

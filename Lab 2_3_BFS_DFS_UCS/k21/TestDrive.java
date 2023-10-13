@@ -59,18 +59,18 @@ public class TestDrive {
 		System.out.println(resultUCS2);
 		System.out.println(NodeUtils.printPath(resultUCS2));
 		
-		//Depth Limited Search
+		//Depth Limited Search Test
+		System.out.println("\n*Depth Limited Search Test:");
 		int limitedDepth1 = 2;
-		System.out.println("\nDepth Limited Search Test with limited depth = " + limitedDepth1 + ":");
+		System.out.println("Depth Limited Search Test with limited depth = " + limitedDepth1 + ":");
 		DepthLimitedSearchAlgo algoDLS = new DepthLimitedSearchAlgo();
 		Node resultDLS1 = algoDLS.execute(nodeS, "G", limitedDepth1);
 		System.out.println(NodeUtils.printPath(resultDLS1));
 		
-		int limitedDepth2 = 4;
+		int limitedDepth2 = 3;
 		System.out.println("Depth Limited Search Test with limited depth = " + limitedDepth2 + ":");
-		DepthLimitedSearchAlgo algoDLS2 = new DepthLimitedSearchAlgo();
-		Node resultDLS2 = algoDLS2.execute(nodeS, "G", limitedDepth2);
-		System.out.println(NodeUtils.printPath(resultDLS2));
+		Node resultDLS2 = algoDLS.execute(nodeS, "G", limitedDepth2);
+		System.out.println(NodeUtils.printPath(resultDLS2));		
 	}
 
 }

@@ -24,8 +24,8 @@ public class TestDrive_T3 {
 		nodeE.addEdge(nodeG, 6); 
 		nodeF.addEdge(nodeG, 1);
 
-		//Breadth First Search Test
-		System.out.println("*Breadth First Search Test:");
+		//Breadth First Search using Tree Search Test
+		System.out.println("*Breadth First Search using Tree Search Test:");
 		System.out.println("Breadth First Search 1 Test:");
 		ISearchAlgo algoBFS = new BreadthFirstSearchAlgo();
 		Node resultBFS1 = algoBFS.execute(nodeS, "G");
@@ -35,8 +35,8 @@ public class TestDrive_T3 {
 		Node resultBFS2 = algoBFS.execute(nodeS, "A", "G");
 		System.out.println(NodeUtils.printPath(resultBFS2));
 		
-		//Depth First Search Test
-		System.out.println("\n*Depth First Search Test:");
+		//Depth First Search using Tree Search Test
+		System.out.println("\n*Depth First Search using Tree Search Test:");
 		System.out.println("Depth First Search 1 Test:");
 		ISearchAlgo algoDFS = new DepthFirstSearchAlgo();
 		Node resultDFS1 = algoDFS.execute(nodeS, "G");

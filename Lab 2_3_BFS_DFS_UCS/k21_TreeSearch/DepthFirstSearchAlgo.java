@@ -9,7 +9,6 @@ public class DepthFirstSearchAlgo implements ISearchAlgo{
 	@Override
 	public Node execute(Node root, String goal) {
 		// TODO Auto-generated method stub
-		if (root.getLabel().equals(goal)) return root;
 		Stack<Node> frontier = new Stack<Node>();
 		List<Node> explored = new ArrayList<>();
 		frontier.add(root);
@@ -37,6 +36,7 @@ public class DepthFirstSearchAlgo implements ISearchAlgo{
 		if (root.getLabel().equals(goal)) return root;
 		if (start.equals(goal)) return new Node(goal);
 		Node strartNode = execute(root, start);
+		if (strartNode == null) return null;
 		strartNode.setParent(null);
 		return execute(strartNode, goal);
 	}
