@@ -44,7 +44,7 @@ public class AStarSearchAlgo implements IInformedSearchAlgo {
 					frontier.add(n);
 				} else if (explored.contains(n)) {
 					continue;
-				} else if ((n.getG() + n.getH()) > newGCost) {
+				} else if ((n.getG()) > newGCost) {
 					frontier.remove(n);
 					n.setParent(currentNode);
 					n.setG(newGCost);
